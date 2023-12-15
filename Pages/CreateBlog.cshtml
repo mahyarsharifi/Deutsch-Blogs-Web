@@ -1,0 +1,58 @@
+﻿@page
+@model BlogWeb.Pages.CreateBlogModel
+@{
+    ViewData["Title"] = "Blog Erstellen";
+}
+
+<div class="col-12 mb-3 text-center">
+    @if (Model.SuccesMessage != null)
+    {
+        <div class="alert alert-success">
+            @Model.SuccesMessage
+        </div>
+    }
+    else if (Model.ErrorMessage != null)
+    {
+        <div class="alert alert-success">
+            @Model.ErrorMessage
+        </div>
+    }
+    <div class="col-6 mr-auto ml-auto text-center">
+        <h1 class="border-bottom">Erstellen Einen Neuen Blog</h1>
+    </div>
+</div>
+
+<form class="mr-auto ml-auto" method="post">
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label asp-for="@Model.Command.Title">Titel</label>
+            <input class="form-control" asp-for="@Model.Command.Title">
+            <span asp-validation-for="@Model.Command.Title" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-6">
+            <label asp-for="@Model.Command.Picture">Bild</label>
+            <input class="form-control" asp-for="@Model.Command.Picture">
+            <span asp-validation-for="@Model.Command.Picture" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-6">
+            <label asp-for="@Model.Command.PictureAlt">BildAlt</label>
+            <input class="form-control" asp-for="@Model.Command.PictureAlt">
+        </div>
+        <div class="form-group col-md-6">
+            <label asp-for="@Model.Command.PictureTitle">BildTitel</label>
+            <input class="form-control" asp-for="@Model.Command.PictureTitle">
+        </div>
+        <div class="form-group col-md-12">
+            <label asp-for="@Model.Command.ShortDescription">Kurze Beschreibung</label>
+            <textarea class="form-control" asp-for="@Model.Command.ShortDescription"></textarea>
+            <span asp-validation-for="@Model.Command.ShortDescription" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.Command.Body">Körper</label>
+        <textarea rows="5" type="text" class="form-control" asp-for="@Model.Command.Body"></textarea>
+        <span asp-validation-for="@Model.Command.Body" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-success">Erstellen</button>
+</form>
+

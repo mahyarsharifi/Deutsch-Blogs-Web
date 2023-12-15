@@ -1,0 +1,66 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = " Haup Seit ";
+}
+
+<div class="col-12 mb-3">
+    <div class="row">
+        <div class="border-bottom col-3 ml-auto mr-auto text-center">
+            <h2>Neueste Blog</h2>
+        </div>
+    </div>
+</div>
+
+@foreach (var article in Model.Blogs)
+{
+    <div class="col-4 mb-2">
+        <div class="card">
+            <img src="@article.Picture" class="card-img-top img-thumbnail article-image" alt="@article.PictureAlt" title="@article.PictureTitle">
+            <div class="card-body">
+                <h5 class="card-title">@article.Title</h5>
+                <p class="card-text">
+                    @article.ShortDescription
+                </p>
+                <a asp-page="./BlogDetails"
+               asp-route-id="@article.Id"
+               class="btn btn-primary">Mehr Lesen ...</a>
+
+                <a asp-page-handler="Delete" asp-route-id="@article.Id" class="btn btn-danger" data-toggle="modal" data-target="#deleteConfirmationModal-@article.Id" data-article-id="@article.Id">Löschen</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade text-center" id="deleteConfirmationModal-@article.Id" tabindex="-1" role="dialog" aria-labelledby="deleteConfirmationModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content text-center">
+                <div class="modal-header text-center">
+                    <h5 class="modal-title" id="deleteConfirmationModalLabel">Bestätigung Löschen</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-center">
+                    Sind Sie Sicher, Dass Sie Löschen Möchten @article.Title ?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Schließen</button>
+                    <a asp-page-handler="Delete" asp-route-id="@article.Id" id="deleteArticleButton" class="btn btn-danger">Löschen</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+}
+
+<script>
+    $(document).ready(function () {
+        $('#deleteConfirmationModal').on('show.bs.modal', function (e) {
+            var articleId = $(e.relatedTarget).data('article-id');
+
+            // Update the "Delete" button in the modal to include the article ID in its href
+            $('#deleteArticleButton').attr('href', '/YourDeletePage?articleId=' + articleId);
+        });
+    });
+</script>

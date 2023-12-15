@@ -1,0 +1,19 @@
+﻿@page
+@model BlogWeb.Pages.BlogDetailsModel
+@{
+    ViewData["Title"] = Model.Blog.Title;
+}
+
+<section class="text-center container ml-auto mr-auto">
+    <div class="col-12 mb-3 font-monospace border border-dark rounded bg-light p-2 mb-2 border-opacity-50">
+        <h1>@Model.Blog.Title</h1>
+    </div>
+    <div class="col-12 mb-3">
+        <img src="@Model.Blog.Picture" alt="@Model.Blog.PictureAlt" title="@Model.Blog.PictureTitle" class="img-fluid rounded mx-auto d-block border border-black border-5">
+    </div>
+    <div class="col-12">
+        <p class="article-content text-body fw-semibold fs-3 border border-dark rounded bg-light p-2 mb-2 border-opacity-50">
+            @Model.Blog.Body
+        </p>
+    </div>
+</section>
